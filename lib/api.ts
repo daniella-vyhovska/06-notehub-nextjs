@@ -4,6 +4,16 @@ import type { Note } from "../types/note";
 const BASE_URL = "https://notehub-public.goit.study/api/notes";
 const TOKEN = process.env.NEXT_PUBLIC_NOTEHUB_TOKEN;
 
+const api = axios.create({
+  baseURL: BASE_URL,
+  headers: {
+    Authorization: `Bearer ${TOKEN}`,
+  },
+});
+
+// -----------------------------
+// Типи відповіді API
+// -----------------------------
 export interface FetchNotesResponse {
   notes: Note[];
   totalPages: number;
@@ -12,44 +22,45 @@ export interface FetchNotesResponse {
 export interface CreateNotePayload {
   title: string;
   content: string;
-  tag: "Todo" | "Work" | "Personal" | "Meeting" | "Shopping";
 }
 
-const api = axios.create({
-  baseURL: BASE_URL,
-  headers: {
-    Authorization: `Bearer ${TOKEN}`,
-  },
-});
-
+// -----------------------------
+// GET — отримати список нотаток
+// -----------------------------
 export async function fetchNotes(
   page: number,
-  search?: string
+  search: string
 ): Promise<FetchNotesResponse> {
-  const params: Record<string, string | number> = {
-    page,
-    perPage: 12,
-  };
+  const response = await api.get<FetchNotesResponse>("", {
+    params: {
+      page,
+      ...(search ? { search } : {}),
+    },
+  });
 
-  if (search) {
-    params.search = search;
-  }
-
-  const response = await api.get<FetchNotesResponse>("", { params });
   return response.data;
 }
 
+// -----------------------------
+// GET — отримати нотатку за ID
+// -----------------------------
 export async function fetchNoteById(id: string): Promise<Note> {
-  const response = await api.get<{ data: Note }>(`/${id}`);
-  return response.data.data;
+  const response = await api.get<Note>(`/${id}`);
+  return response.data;
 }
 
+// -----------------------------
+// POST — створити нотатку
+// -----------------------------
 export async function createNote(payload: CreateNotePayload): Promise<Note> {
-  const response = await api.post<{ data: Note }>("", payload);
-  return response.data.data;
+  const response = await api.post<Note>("", payload);
+  return response.data;
 }
 
+// -----------------------------
+// DELETE — видалити нотатку
+// -----------------------------
 export async function deleteNote(id: string): Promise<Note> {
-  const response = await api.delete<{ data: Note }>(`/${id}`);
-  return response.data.data;
+  const response = await api.delete<Note>(`/${id}`);
+  return response.data;
 }
