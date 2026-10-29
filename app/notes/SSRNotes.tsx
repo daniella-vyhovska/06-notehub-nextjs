@@ -3,7 +3,7 @@ import getQueryClient from "../../lib/getQueryClient";
 import { fetchNotes } from "../../lib/api";
 import NotesClient from "./Notes.client";
 
-export default async function SSRWrapper() {
+export default async function SSRNotes() {
   const queryClient = getQueryClient();
 
   await queryClient.prefetchQuery({

@@ -1,5 +1,5 @@
-import SSRWrapper from "./SSRWrapper";
+import SSRNotes from "./SSRNotes";
 
 export default function NotesPage() {
-  return <SSRWrapper />;
+  return <SSRNotes />;
 }
