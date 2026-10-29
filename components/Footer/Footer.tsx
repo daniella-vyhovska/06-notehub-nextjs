@@ -1,10 +1,13 @@
+import { getYear } from "../../lib/getYear";
 import css from "./Footer.module.css";
 
 export default function Footer() {
+  const year = getYear();
+
   return (
     <footer className={css.footer}>
       <div className={css.content}>
-        <p>© {new Date().getUTCFullYear()} NoteHub. All rights reserved.</p>
+        <p>© {year} NoteHub. All rights reserved.</p>
         <div className={css.wrap}>
           <p>Developer: Daniella</p>
           <p>
