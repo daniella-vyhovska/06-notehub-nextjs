@@ -7,8 +7,8 @@ export default function getQueryClient() {
     client = new QueryClient({
       defaultOptions: {
         queries: {
-          staleTime: Infinity,   // не викликає Date.now()
-          gcTime: Infinity,      // не викликає Date.now()
+          staleTime: Infinity,
+          gcTime: Infinity,
           retry: false,
           refetchOnWindowFocus: false,
         },

@@ -1,8 +1,7 @@
-import { getYear } from "../../lib/getYear";
+import { year } from "../../lib/getYear";
 import css from "./Footer.module.css";
 
 export default function Footer() {
-  const year = getYear();
 
   return (
     <footer className={css.footer}>

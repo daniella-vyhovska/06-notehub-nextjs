@@ -4,10 +4,8 @@ const nextConfig: NextConfig = {
   /* config options here */
   experimental: {
     agentFeedback: true,
+    cacheComponents: false,
   },
-  cacheComponents: true,
-  partialPrefetching: true,
-  reactCompiler: true,
 };
 
 export default nextConfig;

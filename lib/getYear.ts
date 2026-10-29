@@ -1,4 +1,1 @@
-export async function getYear() {
-  "use cache";
-  return new Date().getFullYear();
-}
+export const year = new Date().getFullYear();
